@@ -1,5 +1,6 @@
 package com.jorgeromo.androidClassMp1.firstpartial.onboarding.views
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,11 +17,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.jorgeromo.androidClassMp1.firstpartial.onboarding.model.OnboardingPageModel
 
-/**
- * Vista que tiene la pagina del onboarding (Imagen, titulo, descripción)
- */
+private const val TAG = "OnboardingPageView"
+
 @Composable
 fun OnboardingPageView(pageModel: OnboardingPageModel) {
+    Log.d(TAG, "Renderizando página: ${pageModel.title}")
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally

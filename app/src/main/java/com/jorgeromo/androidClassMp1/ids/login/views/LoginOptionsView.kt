@@ -1,8 +1,6 @@
 package com.jorgeromo.androidClassMp1.ids.login.views
 
 import android.content.Context
-import android.content.Intent
-import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -25,6 +23,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.jorgeromo.androidClassMp1.R
+import androidx.core.content.ContextCompat
+import java.util.concurrent.Executor
 
 @Composable
 fun LoginOptionsView(navController: NavHostController? = null) {
@@ -72,7 +72,6 @@ fun LoginOptionsView(navController: NavHostController? = null) {
         isLoading = true
         Toast.makeText(context, "Iniciando sesión...", Toast.LENGTH_SHORT).show()
 
-        // Simulación de login
         android.os.Handler().postDelayed({
             isLoading = false
             Toast.makeText(context, "¡Login exitoso!", Toast.LENGTH_SHORT).show()
@@ -82,7 +81,7 @@ fun LoginOptionsView(navController: NavHostController? = null) {
         }, 2000)
     }
 
-    // Función simplificada para verificar biometricos
+    // Función para verificar disponibilidad de biometricos (versión simplificada)
     fun isBiometricAvailable(context: Context): Boolean {
         return try {
             val packageManager = context.packageManager
@@ -93,26 +92,17 @@ fun LoginOptionsView(navController: NavHostController? = null) {
         }
     }
 
-    // Función para iniciar reconocimiento biométrico (simulado)
+    // Función para iniciar reconocimiento biométrico (versión simplificada)
     fun startBiometricAuthentication() {
         if (!isBiometricAvailable(context)) {
-            Toast.makeText(context, "Autenticación biométrica no disponible", Toast.LENGTH_LONG).show()
-
-            // Ofrecer ir a configuración de seguridad
-            Toast.makeText(context, "Configure su autenticación biométrica en Ajustes", Toast.LENGTH_LONG).show()
-            val intent = Intent(Settings.ACTION_SECURITY_SETTINGS)
-            try {
-                context.startActivity(intent)
-            } catch (e: Exception) {
-                Toast.makeText(context, "No se pudo abrir ajustes de seguridad", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(context, "Autenticación biométrica no disponible en este dispositivo", Toast.LENGTH_LONG).show()
             return
         }
 
         isFacialLoading = true
         Toast.makeText(context, "Iniciando autenticación biométrica...", Toast.LENGTH_SHORT).show()
 
-        // Simulación de autenticación biométrica (ya que no podemos usar BiometricPrompt directamente)
+        // Simulación de autenticación biométrica
         android.os.Handler().postDelayed({
             isFacialLoading = false
 
@@ -232,11 +222,12 @@ fun LoginOptionsView(navController: NavHostController? = null) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        // BOTÓN DE RECONOCIMIENTO BIOMÉTRICO
         Button(
             onClick = { startBiometricAuthentication() },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
-            enabled = !isLoading && !isFacialLoading
+            enabled = !isLoading && !isFacialLoading && isBiometricAvailable(context)
         ) {
             if (isFacialLoading) {
                 CircularProgressIndicator(
@@ -249,7 +240,7 @@ fun LoginOptionsView(navController: NavHostController? = null) {
             } else {
                 Icon(
                     imageVector = Icons.Default.Face,
-                    contentDescription = "Biométrico",
+                    contentDescription = "Autenticación Biométrica",
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
@@ -257,15 +248,29 @@ fun LoginOptionsView(navController: NavHostController? = null) {
             }
         }
 
+        // Información sobre el estado biométrico
+        Spacer(modifier = Modifier.height(16.dp))
+
         if (!isBiometricAvailable(context)) {
-            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "⚠️ Autenticación biométrica no disponible",
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "Configure huella digital o rostro en Ajustes de seguridad",
+                text = "Este dispositivo no soporta huella digital o reconocimiento facial",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+        } else {
+            Text(
+                text = "✅ Autenticación biométrica disponible",
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.bodySmall
+            )
+            Text(
+                text = "Toque el botón para autenticarse biométricamente",
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 4.dp)

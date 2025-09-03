@@ -1,5 +1,6 @@
 package com.jorgeromo.androidClassMp1.firstpartial.onboarding.views
 
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,9 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-/**
- * Vista del onboarding que muestra los botones de anterior, siguiente/empezar
- */
+private const val TAG = "BottomBarView"
+
 @Composable
 fun BottomBarView(
     isLastPage: Boolean,
@@ -22,6 +22,8 @@ fun BottomBarView(
     onPrev: () -> Unit,
     onNext: () -> Unit
 ) {
+    Log.v(TAG, "Renderizando barra inferior - Página: $page/$total, Última página: $isLastPage")
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,12 +31,20 @@ fun BottomBarView(
     ) {
         TextButton(
             enabled = page > 0,
-            onClick = onPrev
-        ) { Text("Anterior") }
+            onClick = {
+                Log.d(TAG, "Botón Anterior clickeado")
+                onPrev()
+            }
+        ) {
+            Text("Anterior")
+        }
 
         Spacer(Modifier.weight(1f))
 
-        Button(onClick = onNext) {
+        Button(onClick = {
+            Log.d(TAG, "Botón ${if (isLastPage) "Empezar" else "Siguiente"} clickeado")
+            onNext()
+        }) {
             Text(if (isLastPage) "Empezar" else "Siguiente")
         }
     }

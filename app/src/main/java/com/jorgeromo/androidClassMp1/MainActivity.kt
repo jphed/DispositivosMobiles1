@@ -1,7 +1,6 @@
 package com.jorgeromo.androidClassMp1
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
@@ -10,6 +9,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jorgeromo.androidClassMp1.firstpartial.onboarding.viewmodel.OnboardingViewModel
 import com.jorgeromo.androidClassMp1.firstpartial.onboarding.views.OnboardingView
@@ -18,8 +18,7 @@ import com.jorgeromo.androidClassMp1.ui.theme.AndroidClassMP1Theme
 import com.jorgeromo.androidClassMp1.utils.DataStoreManager
 import kotlinx.coroutines.launch
 
-// Cambia ComponentActivity por androidx.activity.ComponentActivity
-class MainActivity : androidx.activity.ComponentActivity() {
+class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,11 +30,10 @@ class MainActivity : androidx.activity.ComponentActivity() {
                 val scope = rememberCoroutineScope()
                 val vm: OnboardingViewModel = viewModel()
 
-                // Estado nulo mientras se obtiene el valor real del Flow
                 val onboardingDone: Boolean? by ds.onboardingDoneFlow.collectAsState(initial = null)
 
                 when (onboardingDone) {
-                    null -> SplashLoader() // loader / splash temporal
+                    null -> SplashLoader()
                     false -> OnboardingView(
                         viewModel = vm,
                         onFinish = {
