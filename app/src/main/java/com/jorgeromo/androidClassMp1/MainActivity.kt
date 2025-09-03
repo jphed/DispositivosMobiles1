@@ -18,7 +18,8 @@ import com.jorgeromo.androidClassMp1.ui.theme.AndroidClassMP1Theme
 import com.jorgeromo.androidClassMp1.utils.DataStoreManager
 import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
+// Cambia ComponentActivity por androidx.activity.ComponentActivity
+class MainActivity : androidx.activity.ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

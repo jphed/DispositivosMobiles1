@@ -20,6 +20,7 @@ import com.jorgeromo.androidClassMp1.ids.sum.views.SumView
 import com.jorgeromo.androidClassMp1.ids.temperature.views.TempView
 import com.jorgeromo.androidClassMp1.thirdpartial.ThirdPartialView
 import androidx.compose.ui.graphics.Color
+import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +33,7 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
         ScreenNavigation.ThirdPartial
     )
 
-    // Mapa de títulos por ruta (incluye tabs y pantallas internas)
+    // Mapa de títulos por ruta - CORREGIDO
     val routeTitles = remember {
         mapOf(
             ScreenNavigation.Ids.route to ScreenNavigation.Ids.label,
@@ -40,29 +41,29 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             ScreenNavigation.SecondPartial.route to ScreenNavigation.SecondPartial.label,
             ScreenNavigation.ThirdPartial.route to ScreenNavigation.ThirdPartial.label,
 
-            // Rutas internas (ajusta a tus strings preferidos)
-            ScreenNavigation.IMC.route to "IMC",
-            ScreenNavigation.Login.route to "Login",
-            ScreenNavigation.Sum.route to "Suma",
-            ScreenNavigation.Temperature.route to "Temperatura",
-            ScreenNavigation.StudentList.route to "Estudiantes",
-            ScreenNavigation.Locations.route to "Ubicaciones"
+            // Rutas internas - usa .route en lugar de .views.loginOptionsView.route
+            ScreenNavigation.IMC.route to ScreenNavigation.IMC.label,
+            ScreenNavigation.Login.route to ScreenNavigation.Login.label,
+            ScreenNavigation.LoginOptions.route to ScreenNavigation.LoginOptions.label, // CORREGIDO
+            ScreenNavigation.Sum.route to ScreenNavigation.Sum.label,
+            ScreenNavigation.Temperature.route to ScreenNavigation.Temperature.label,
+            ScreenNavigation.StudentList.route to ScreenNavigation.StudentList.label,
+            ScreenNavigation.Locations.route to ScreenNavigation.Locations.label
         )
     }
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    // Si usas nested graphs, puedes leer la jerarquía; aquí basta con la route actual:
     val currentRoute = navBackStackEntry?.destination?.route
     val currentTitle = routeTitles[currentRoute] ?: ""
 
     Scaffold(
         topBar = {
-            // Puedes usar SmallTopAppBar o CenterAlignedTopAppBar
             CenterAlignedTopAppBar(
                 title = { Text(text = "Jorge Parra 13104") },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = Color(0xFF9575CD), // Azul
-                titleContentColor = Color.White
-            )
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color(0xFF9575CD),
+                    titleContentColor = Color.White
+                )
             )
         },
         bottomBar = {
@@ -95,13 +96,14 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(ScreenNavigation.Ids.route) { IdsView(navController) }
-            composable(ScreenNavigation.FirstPartial.route) { FirstPartialView() }
+            composable(ScreenNavigation.FirstPartial.route) { FirstPartialView(navController) }
             composable(ScreenNavigation.SecondPartial.route) { SecondPartialView() }
             composable(ScreenNavigation.ThirdPartial.route) { ThirdPartialView(navController) }
 
-            // Rutas internas
+            // Rutas internas - CORREGIDO
             composable(ScreenNavigation.IMC.route) { IMCView() }
             composable(ScreenNavigation.Login.route) { LoginView() }
+            composable(ScreenNavigation.LoginOptions.route) { LoginOptionsView(navController) } // CORREGIDO
             composable(ScreenNavigation.Sum.route) { SumView() }
             composable(ScreenNavigation.Temperature.route) { TempView() }
             composable(ScreenNavigation.StudentList.route) { StudentView() }

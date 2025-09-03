@@ -15,4 +15,7 @@
     <string name="temp_label">Calculator of Celsius to Fahrenheit</string>
     <string name="enter_cel">Celsius (C°)</string>
     <string name="calculate_temp">Calculate C° to F°</string>
+    <string name="facial_login">Iniciar con reconocimiento facial</string>
+    <string name="facial_login_success">Reconocimiento facial exitoso</string>
+    <string name="facial_login_error">Error en el reconocimiento facial</string>
 </resources>
