@@ -14,12 +14,12 @@ import com.jorgeromo.androidClassMp1.firstpartial.FirstPartialView
 import com.jorgeromo.androidClassMp1.ids.imc.views.IMCView
 import com.jorgeromo.androidClassMp1.ids.IdsView
 import com.jorgeromo.androidClassMp1.ids.location.views.LocationListScreen
-import com.jorgeromo.androidClassMp1.ids.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.student.views.StudentView
 import com.jorgeromo.androidClassMp1.ids.sum.views.SumView
 import com.jorgeromo.androidClassMp1.ids.temperature.views.TempView
 import com.jorgeromo.androidClassMp1.thirdpartial.ThirdPartialView
 import androidx.compose.ui.graphics.Color
+import com.jorgeromo.androidClassMp1.firstpartial.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
 
 
