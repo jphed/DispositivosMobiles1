@@ -29,7 +29,6 @@ class MainActivity : FragmentActivity() {
             AndroidClassMP1Theme {
                 val scope = rememberCoroutineScope()
                 val vm: OnboardingViewModel = viewModel()
-
                 val onboardingDone: Boolean? by ds.onboardingDoneFlow.collectAsState(initial = null)
 
                 when (onboardingDone) {
@@ -49,7 +48,10 @@ class MainActivity : FragmentActivity() {
 
 @Composable
 private fun SplashLoader() {
-    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(
+        Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
         CircularProgressIndicator()
     }
 }
