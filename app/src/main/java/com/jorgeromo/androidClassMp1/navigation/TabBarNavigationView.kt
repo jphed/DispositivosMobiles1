@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import androidx.navigation.compose.rememberNavController
 import com.jorgeromo.androidClassMp1.firstpartial.FirstPartialView
+import com.jorgeromo.androidClassMp1.firstpartial.lottieAnimation.LottieAnimationView
 import com.jorgeromo.androidClassMp1.ids.imc.views.IMCView
 import com.jorgeromo.androidClassMp1.ids.IdsView
 import com.jorgeromo.androidClassMp1.ids.location.views.LocationListScreen
@@ -22,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import com.jorgeromo.androidClassMp1.firstpartial.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TabBarNavigationView(navController: NavHostController = rememberNavController()) {
@@ -33,7 +33,7 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
         ScreenNavigation.ThirdPartial
     )
 
-    // Mapa de títulos por ruta - CORREGIDO
+    // Mapa de títulos por ruta
     val routeTitles = remember {
         mapOf(
             ScreenNavigation.Ids.route to ScreenNavigation.Ids.label,
@@ -41,14 +41,17 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             ScreenNavigation.SecondPartial.route to ScreenNavigation.SecondPartial.label,
             ScreenNavigation.ThirdPartial.route to ScreenNavigation.ThirdPartial.label,
 
-            // Rutas internas - usa .route en lugar de .views.loginOptionsView.route
+            // Rutas internas
             ScreenNavigation.IMC.route to ScreenNavigation.IMC.label,
             ScreenNavigation.Login.route to ScreenNavigation.Login.label,
-            ScreenNavigation.LoginOptions.route to ScreenNavigation.LoginOptions.label, // CORREGIDO
+            ScreenNavigation.LoginOptions.route to ScreenNavigation.LoginOptions.label,
             ScreenNavigation.Sum.route to ScreenNavigation.Sum.label,
             ScreenNavigation.Temperature.route to ScreenNavigation.Temperature.label,
             ScreenNavigation.StudentList.route to ScreenNavigation.StudentList.label,
-            ScreenNavigation.Locations.route to ScreenNavigation.Locations.label
+            ScreenNavigation.Locations.route to ScreenNavigation.Locations.label,
+
+            // 🔹 NUEVA ruta Lottie
+            "LottieRoute" to "Animación Lottie"
         )
     }
 
@@ -100,14 +103,17 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             composable(ScreenNavigation.SecondPartial.route) { SecondPartialView() }
             composable(ScreenNavigation.ThirdPartial.route) { ThirdPartialView(navController) }
 
-            // Rutas internas - CORREGIDO
+            // Rutas internas
             composable(ScreenNavigation.IMC.route) { IMCView() }
             composable(ScreenNavigation.Login.route) { LoginView() }
-            composable(ScreenNavigation.LoginOptions.route) { LoginOptionsView(navController) } // CORREGIDO
+            composable(ScreenNavigation.LoginOptions.route) { LoginOptionsView(navController) }
             composable(ScreenNavigation.Sum.route) { SumView() }
             composable(ScreenNavigation.Temperature.route) { TempView() }
             composable(ScreenNavigation.StudentList.route) { StudentView() }
             composable(ScreenNavigation.Locations.route) { LocationListScreen() }
+
+            // 🔹 NUEVA ruta para Lottie
+            composable("LottieRoute") { LottieAnimationView(navController) }
         }
     }
 }

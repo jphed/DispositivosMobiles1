@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation("com.airbnb.android:lottie-compose:6.0.1")
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
-import android.content.Intent
 
 @Composable
 fun FirstPartialView(navController: NavController? = null) {
@@ -33,9 +32,9 @@ fun FirstPartialView(navController: NavController? = null) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
+        // Botón hacia login
         Button(
             onClick = {
-                // Navegar a la pantalla de login usando Navigation Component
                 navController?.navigate("LoginRoute")
             },
             modifier = Modifier
@@ -43,6 +42,20 @@ fun FirstPartialView(navController: NavController? = null) {
                 .padding(horizontal = 32.dp)
         ) {
             Text("Opciones de Login")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Botón hacia Lottie
+        Button(
+            onClick = {
+                navController?.navigate("LottieRoute")
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp)
+        ) {
+            Text("Ver Animación Lottie")
         }
     }
 }
