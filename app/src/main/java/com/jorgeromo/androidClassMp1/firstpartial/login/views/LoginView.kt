@@ -1,6 +1,5 @@
 package com.jorgeromo.androidClassMp1.firstpartial.login.views
 
-
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
@@ -28,11 +27,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.jorgeromo.androidClassMp1.R
 import com.jorgeromo.androidClassMp1.firstpartial.login.model.network.RetrofitProvider
 import com.jorgeromo.androidClassMp1.firstpartial.login.model.repository.AuthRepository
 import com.jorgeromo.androidClassMp1.firstpartial.login.viewmodel.LoginViewModel
 import com.jorgeromo.androidClassMp1.firstpartial.login.viewmodel.LoginViewModelFactory
+import com.jorgeromo.androidClassMp1.navigation.ScreenNavigation
 import com.jorgeromo.androidClassMp1.ui.theme.AndroidClassMP1Theme
 import kotlinx.coroutines.flow.collectLatest
 
@@ -50,7 +52,7 @@ import kotlinx.coroutines.flow.collectLatest
    emitidos por el ViewModel.
 */
 @Composable
-fun LoginView() {
+fun LoginView(navHostController: NavHostController) {
     // Inyección simple del repositorio y el ViewModel
     val repo = remember { AuthRepository(RetrofitProvider.authApi) }
     val vm: LoginViewModel = viewModel(factory = LoginViewModelFactory(repo))
@@ -86,6 +88,19 @@ fun LoginView() {
         vm.toastEvents.collectLatest { msg ->
             showToastSafe(msg)
             snackbarHostState.showSnackbar(message = msg)
+        }
+    }
+
+    LaunchedEffect(vm) {
+        vm.navEvents.collectLatest { event ->
+            when (event) {
+                is LoginViewModel.LoginNavEvent.GoHome -> {
+                    navHostController.navigate(ScreenNavigation.Home.route) {
+                        popUpTo(ScreenNavigation.Login.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            }
         }
     }
 
@@ -196,16 +211,4 @@ fun LoginView() {
             }
         }
     }
-}
-
-/*
- LoginViewPreview
-
- Previsualización de la pantalla en Android Studio.
- No ejecuta lógica real de login, solo dibuja la UI.
-*/
-@Preview(showBackground = true)
-@Composable
-fun LoginViewPreview() {
-    AndroidClassMP1Theme { LoginView() }
 }
