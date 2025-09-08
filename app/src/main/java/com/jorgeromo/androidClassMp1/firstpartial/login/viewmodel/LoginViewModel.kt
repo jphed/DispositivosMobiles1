@@ -44,6 +44,16 @@ class LoginViewModel(private val repo: AuthRepository) : ViewModel() {
     private val _toastEvents = Channel<String>(Channel.BUFFERED)
     val toastEvents = _toastEvents.receiveAsFlow()
 
+
+
+    sealed interface LoginNavEvent {
+        data object GoHome : LoginNavEvent
+    }
+
+    private val _navEvents = Channel<LoginNavEvent>(Channel.BUFFERED)
+    val navEvents = _navEvents.receiveAsFlow()
+
+
     /*
      onEmailChange / onPasswordChange
      - Se llaman desde la vista cada vez que el usuario escribe.
@@ -79,6 +89,7 @@ class LoginViewModel(private val repo: AuthRepository) : ViewModel() {
                 val res = repo.login(email, password)
                 if (res.success) {
                     _toastEvents.send("Login exitoso. Bienvenido ${res.user?.name ?: ""}")
+                    _navEvents.send(LoginNavEvent.GoHome)
                 } else {
                     _toastEvents.send(res.message.ifBlank { "Login fallido" })
                 }
