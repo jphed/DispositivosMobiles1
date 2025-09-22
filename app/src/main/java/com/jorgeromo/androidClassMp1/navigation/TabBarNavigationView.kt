@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import com.jorgeromo.androidClassMp1.firstpartial.login.views.HomeView
 import com.jorgeromo.androidClassMp1.firstpartial.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
+import com.jorgeromo.androidClassMp1.secondpartial.qrcode.QrCodeView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -102,7 +103,7 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
         ) {
             composable(ScreenNavigation.Ids.route) { IdsView(navController) }
             composable(ScreenNavigation.FirstPartial.route) { FirstPartialView(navController) }
-            composable(ScreenNavigation.SecondPartial.route) { SecondPartialView() }
+            composable(ScreenNavigation.SecondPartial.route) { SecondPartialView(navController) }
             composable(ScreenNavigation.ThirdPartial.route) { ThirdPartialView(navController) }
 
             // Rutas internas
@@ -114,6 +115,9 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             composable(ScreenNavigation.Temperature.route) { TempView() }
             composable(ScreenNavigation.StudentList.route) { StudentView() }
             composable(ScreenNavigation.Locations.route) { LocationListScreen() }
+
+            // Ruta para lector de QR
+            composable(ScreenNavigation.QrCode.route) { QrCodeView() }
 
             // 🔹 NUEVA ruta para Lottie
             composable("LottieRoute") { LottieAnimationView(navController) }
