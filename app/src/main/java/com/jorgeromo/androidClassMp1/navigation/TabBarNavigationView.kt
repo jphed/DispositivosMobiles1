@@ -25,6 +25,7 @@ import com.jorgeromo.androidClassMp1.firstpartial.login.views.HomeView
 import com.jorgeromo.androidClassMp1.firstpartial.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
 import com.jorgeromo.androidClassMp1.secondpartial.qrcode.QrCodeView
+import com.jorgeromo.androidClassMp1.secondpartial.home.SecondHomeView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,6 +53,7 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             ScreenNavigation.Temperature.route to ScreenNavigation.Temperature.label,
             ScreenNavigation.StudentList.route to ScreenNavigation.StudentList.label,
             ScreenNavigation.Locations.route to ScreenNavigation.Locations.label,
+            ScreenNavigation.SecondHome.route to ScreenNavigation.SecondHome.label,
 
             // 🔹 NUEVA ruta Lottie
             "LottieRoute" to "Animación Lottie"
@@ -115,6 +117,7 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             composable(ScreenNavigation.Temperature.route) { TempView() }
             composable(ScreenNavigation.StudentList.route) { StudentView() }
             composable(ScreenNavigation.Locations.route) { LocationListScreen() }
+            composable(ScreenNavigation.SecondHome.route) { SecondHomeView() }
 
             // Ruta para lector de QR
             composable(ScreenNavigation.QrCode.route) { QrCodeView() }

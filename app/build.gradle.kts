@@ -96,4 +96,7 @@ dependencies {
 
     // Coroutines (StateFlow / flow)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    
+    // Coil para cargar imágenes desde URLs
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }

@@ -38,5 +38,14 @@ fun SecondPartialView(navController: NavHostController) {
         ) {
             Text("Código QR")
         }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Button(
+            onClick = { navController.navigate(ScreenNavigation.SecondHome.route) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Second Partial Home")
+        }
     }
 }
