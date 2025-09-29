@@ -25,7 +25,16 @@ import com.jorgeromo.androidClassMp1.firstpartial.login.views.HomeView
 import com.jorgeromo.androidClassMp1.firstpartial.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
 import com.jorgeromo.androidClassMp1.secondpartial.qrcode.QrCodeView
-import com.jorgeromo.androidClassMp1.secondpartial.home.SecondHomeView
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.jorgeromo.androidClassMp1.secondpartial.home.model.network.HomeApi
+import com.jorgeromo.androidClassMp1.secondpartial.home.repository.HomeRepository
+import com.jorgeromo.androidClassMp1.secondpartial.home.viewmodel.HomeViewModel
+import com.jorgeromo.androidClassMp1.secondpartial.home.viewmodel.HomeViewModelFactory
+import com.jorgeromo.androidClassMp1.secondpartial.home.views.HomeViewRoutines
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -117,7 +126,18 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
             composable(ScreenNavigation.Temperature.route) { TempView() }
             composable(ScreenNavigation.StudentList.route) { StudentView() }
             composable(ScreenNavigation.Locations.route) { LocationListScreen() }
-            composable(ScreenNavigation.SecondHome.route) { SecondHomeView() }
+            composable(ScreenNavigation.SecondHome.route) {
+                val retrofit = Retrofit.Builder()
+                    .baseUrl("https://gist.githubusercontent.com/YajahiraPP/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                val api = retrofit.create(HomeApi::class.java)
+                val repo = HomeRepository(api)
+                val vm: HomeViewModel = viewModel(factory = HomeViewModelFactory(repo))
+                val uiState by vm.ui.collectAsState()
+                LaunchedEffect(Unit) { vm.fetchHome() }
+                HomeViewRoutines(uiState = uiState)
+            }
 
             // Ruta para lector de QR
             composable(ScreenNavigation.QrCode.route) { QrCodeView() }
