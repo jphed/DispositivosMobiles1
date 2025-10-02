@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -99,4 +100,9 @@ dependencies {
     
     // Coil para cargar imágenes desde URLs
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // Firebase - BoM y SDKs
+    implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
+    implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-analytics")
 }

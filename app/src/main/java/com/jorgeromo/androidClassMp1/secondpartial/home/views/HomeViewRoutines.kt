@@ -108,7 +108,7 @@ fun RutinaCard(rutina: RutinaDto) {
             ) {
                 Image(
                     painter = rememberAsyncImagePainter(rutina.imagen),
-                    contentDescription = rutina.nombre,
+                    contentDescription = rutina.nombre.orEmpty(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(110.dp)
@@ -117,13 +117,13 @@ fun RutinaCard(rutina: RutinaDto) {
                 )
             }
             Text(
-                text = rutina.nombre,
+                text = rutina.nombre.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, fontSize = 16.sp),
                 modifier = Modifier.padding(top = 8.dp),
                 maxLines = 1
             )
             Text(
-                text = rutina.musculo,
+                text = rutina.musculo.orEmpty(),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -145,24 +145,25 @@ fun EjercicioCard(ejercicio: EjercicioDto) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
-        ) {
-            Text(
-                text = ejercicio.nombre,
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                maxLines = 1
-            )
-            Text(
-                text = ejercicio.categoria,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1
-            )
-            Text(
-                text = ejercicio.repeticiones,
-                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+            content = {
+                Text(
+                    text = ejercicio.nombre.orEmpty(),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                    maxLines = 1
+                )
+                Text(
+                    text = ejercicio.categoria.orEmpty(),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1
+                )
+                Text(
+                    text = ejercicio.repeticiones.orEmpty(),
+                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        )
     }
 }

@@ -9,16 +9,16 @@ data class RoutinesResponse(
 
 data class RutinaDto(
     val id: Int,
-    val nombre: String,
-    val descripcion: String,
-    val musculo: String,
-    val imagen: String,
-    val duracion: String
+    val nombre: String? = null,
+    val descripcion: String? = null,
+    val musculo: String? = null,
+    val imagen: String? = null,
+    val duracion: String? = null
 )
 
 data class EjercicioDto(
     val id: Int,
-    val nombre: String,
-    val repeticiones: String,
-    val categoria: String
+    val nombre: String? = null,
+    val repeticiones: String? = null,
+    val categoria: String? = null
 )

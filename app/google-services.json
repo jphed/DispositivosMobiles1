@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "457266822359",
+    "project_id": "gym4ulsa",
+    "storage_bucket": "gym4ulsa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457266822359:android:303dafc01c753700f54492",
+        "android_client_info": {
+          "package_name": "com.jorgeromo.androidClassMp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Oa_AOlzInnQCHQ_PTfc_ecHcH38f4Os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

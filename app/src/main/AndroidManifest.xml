@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Android 13+: permiso para mostrar notificaciones -->
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"
+        tools:targetApi="33" />
 
     <application
         android:allowBackup="true"
@@ -35,6 +39,23 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidClassMP1" />
+
+        <!-- Servicio de Firebase Cloud Messaging -->
+        <service
+            android:name=".fcm.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Metadata opcional para notificaciones por defecto -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="default_channel" />
     </application>
 
 </manifest>
