@@ -47,5 +47,14 @@ fun SecondPartialView(navController: NavHostController) {
         ) {
             Text("Second Partial Home")
         }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Button(
+            onClick = { navController.navigate(ScreenNavigation.LocationCoordinate.route) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Coordenadas (en vivo)")
+        }
     }
 }

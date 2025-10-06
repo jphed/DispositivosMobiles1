@@ -96,7 +96,7 @@ dependencies {
     implementation("com.google.mlkit:vision-common:17.3.0")
 
     // Coroutines (StateFlow / flow)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     
     // Coil para cargar imágenes desde URLs
     implementation("io.coil-kt:coil-compose:2.4.0")
@@ -105,4 +105,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
     implementation("com.google.firebase:firebase-messaging")
     implementation("com.google.firebase:firebase-analytics")
+
+    // Google Location Services
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }

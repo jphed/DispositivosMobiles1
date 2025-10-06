@@ -25,6 +25,7 @@ import com.jorgeromo.androidClassMp1.firstpartial.login.views.HomeView
 import com.jorgeromo.androidClassMp1.firstpartial.login.views.LoginView
 import com.jorgeromo.androidClassMp1.ids.login.views.LoginOptionsView
 import com.jorgeromo.androidClassMp1.secondpartial.qrcode.QrCodeView
+import com.jorgeromo.androidClassMp1.secondpartial.location.LocationCoordianteView
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -141,6 +142,9 @@ fun TabBarNavigationView(navController: NavHostController = rememberNavControlle
 
             // Ruta para lector de QR
             composable(ScreenNavigation.QrCode.route) { QrCodeView() }
+
+            // Nueva ruta para coordenadas en vivo
+            composable(ScreenNavigation.LocationCoordinate.route) { LocationCoordianteView() }
 
             // 🔹 NUEVA ruta para Lottie
             composable("LottieRoute") { LottieAnimationView(navController) }
