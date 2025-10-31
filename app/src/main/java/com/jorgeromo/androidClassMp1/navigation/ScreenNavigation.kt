@@ -6,7 +6,6 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class ScreenNavigation(val route: String, val label: String, val icon: ImageVector) {
-    
     object Ids : ScreenNavigation("IdsRoute", "Inicio", Icons.Default.Home)
     object FirstPartial : ScreenNavigation("FirstPartialRoute", "Parcial 1", Icons.Default.Event)
     object SecondPartial : ScreenNavigation("SecondPartialRoute", "Parcial 2", Icons.Default.Event)
@@ -22,4 +21,6 @@ sealed class ScreenNavigation(val route: String, val label: String, val icon: Im
     object SecondHome : ScreenNavigation("SecondHomeRoute", "SP Home", Icons.Default.Home)
     object QrCode : ScreenNavigation("QrCodeRoute", "Código QR", Icons.Default.QrCode)
     object LocationCoordinate : ScreenNavigation("LocationCoordinateRoute", "Coordenadas", Icons.Default.Place)
+    object DesignSystem : ScreenNavigation("DesignSystemRoute", "Sistema de diseño", Icons.Default.Event)
+    object UITesting : ScreenNavigation("UITestingRoute", "Pruebas UI", Icons.Default.CheckCircle)
 }

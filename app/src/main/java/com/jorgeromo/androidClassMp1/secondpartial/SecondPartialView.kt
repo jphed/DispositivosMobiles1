@@ -1,3 +1,5 @@
+package com.jorgeromo.androidClassMp1.secondpartial
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
